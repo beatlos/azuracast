@@ -1,7 +1,9 @@
 # Set the variable value in *.tfvars file
 # or using the -var="hcloud_token=..." CLI option
 variable "hcloud_token" {
-  sensitive = true
+  description = "Token for Hetzner Cloud"
+  type        = string
+  sensitive   = true
 }
 
 terraform {
