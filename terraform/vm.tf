@@ -15,6 +15,11 @@ resource "hcloud_server" "server" {
     ip         = "10.0.1.5"
   }
 
+  public_net {
+    ipv4_enabled = true
+    ipv6_enabled = false
+  }
+
   depends_on = [
     hcloud_network_subnet.network-subnet
   ]
