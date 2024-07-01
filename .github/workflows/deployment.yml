@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     outputs:
-      tfstate: ${{ steps.tfstate.outputs }}
+      public_ip: ${{ steps.tf_output.outputs.public_ip }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -112,12 +112,11 @@ jobs:
         terraform ${{ github.event.inputs.status }} -auto-approve -input=false
 
     - name: Get Terraform Output
-      id: tfstate
+      id: tf_output
       run: |
         cd terraform
-        public_ips=$(terraform output)
-        echo "$public_ips"
-        echo "test=123" >> $GITHUB_OUTPUT
+        public_ip=$(terraform output -raw public_ips)
+        echo "public_ip=${public_ip}" >> $GITHUB_OUTPUT
         
   ansible:
     name: 'Ansible'
@@ -137,12 +136,10 @@ jobs:
 
     - name: Create Inventory File
       env:
-        tfstate: ${{needs.terraform.outputs.tfstate}}
+        public_ip: ${{ needs.terraform.outputs.public_ip }}
       run: |
         echo "[all]" > hosts
-        for ip in $(echo "${{ steps.output.outputs.public_ips }}" | jq -r '.[]'); do
-          echo "$ip" ansible_user=ubuntu >> hosts
-        done 
+        echo "$public_ip ansible_user=ubuntu" >> hosts
 
     - name: Run Ansible Playbook
       run: ansible-playbook -i hosts main.yml      
