@@ -24,7 +24,7 @@ resource "hcloud_firewall" "web" {
 }
 
 resource "hcloud_firewall" "admin" {
-  name = "web"
+  name = "admin"
 
   rule {
     direction = "in"
