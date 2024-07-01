@@ -3,7 +3,7 @@ resource "hcloud_server" "server" {
   server_type = "cpx11"
   image       = "rocky-9"
   location    = "nbg1"
-  ssh_keys    = "hcloud_ssh_key.default.id"
+  ssh_keys    = hcloud_ssh_key.default.id
 
   network {
     network_id = hcloud_network.network.id
