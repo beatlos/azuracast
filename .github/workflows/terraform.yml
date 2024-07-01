@@ -52,7 +52,7 @@ on:
     inputs:
       name:
         type: choice
-        description: Terraform:
+        description: Terraform
         options: 
         - apply
         - destroy
