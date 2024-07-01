@@ -118,7 +118,7 @@ jobs:
         jq --version
         terraform output -json > json
         echo "#########################"
-        jq -r ".public_ips.value.ipv4_address" json
+        jq ".public_ips.value.ipv4_address" json
         echo "#########################"
         public_ip=$(terraform output -json | jq -r ".public_ips.value.ipv4_address")
         echo "$public_ip"
