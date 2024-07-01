@@ -10,3 +10,8 @@ jobs:
   ansible:
     name: 'Ansible'
     runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+  
