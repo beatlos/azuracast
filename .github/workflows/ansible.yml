@@ -5,3 +5,8 @@ on:
     workflows: ["Terraform"]
     types:
       - completed
+
+jobs:
+  ansible:
+    name: 'Ansible'
+    runs-on: ubuntu-latest
