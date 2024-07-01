@@ -117,7 +117,7 @@ jobs:
         cd terraform
         public_ips=$(terraform output)
         echo "$public_ips"
-        echo "$public_ips" >> $GITHUB_OUTPUT
+        echo "test=123" >> $GITHUB_OUTPUT
         
   ansible:
     name: 'Ansible'
