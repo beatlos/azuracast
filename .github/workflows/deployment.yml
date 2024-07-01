@@ -115,7 +115,7 @@ jobs:
       id: tf_output
       run: |
         cd terraform
-        public_ip=$(terraform output -json | jq -r ".public_ip")
+        public_ip=$(terraform output -json | jq -r ".")
         echo "$public_ip"
         echo "public_ip=${public_ip}" >> $GITHUB_OUTPUT
         
