@@ -153,4 +153,4 @@ jobs:
     - name: Run Ansible Playbook
       run: |
         cd ansible
-        ansible-playbook -i hosts main.yml      
+        ansible-playbook -i hosts main.yml -vv      
