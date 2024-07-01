@@ -136,7 +136,7 @@ jobs:
 
     - name: Create Inventory File
       env:
-        tfstate: ${{needs.terraform.}}
+        tfstate: ${{needs.terraform.outputs.tfstate}}
       run: |
         echo "[all]" > hosts
         for ip in $(echo "${{ steps.output.outputs.public_ips }}" | jq -r '.[]'); do
