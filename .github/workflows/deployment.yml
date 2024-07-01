@@ -117,12 +117,16 @@ jobs:
         cd terraform
         jq --version
         terraform output -json > json
-        echo "#########################"
-        jq ".public_ips.value.ipv4_address" json
-        echo "#########################"
-        public_ip=$(terraform output -json | jq -r ".public_ips.value.ipv4_address")
-        echo "$public_ip"
-        echo "public_ip=${public_ip}" >> $GITHUB_OUTPUT
+#        echo "#########################"
+#        terraform output -json > json
+#        echo "#########################"
+#        public_ip=$(terraform output -json | jq -r ".public_ips.value.ipv4_address")
+#        echo "$public_ip"
+#        echo "public_ip=${public_ip}" >> $GITHUB_OUTPUT
+    - name: test
+      run: |
+        terraform output -json > json
+        jq -r ".public_ips.value.ipv4_address"
         
   ansible:
     name: 'Ansible'
