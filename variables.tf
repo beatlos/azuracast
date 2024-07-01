@@ -3,3 +3,9 @@ variable "hcloud_token" {
   type        = string
   sensitive   = true
 }
+
+# Define a variable for the SSH public key
+variable "ssh_public_key" {
+  description = "The SSH public key"
+  type        = string
+}
