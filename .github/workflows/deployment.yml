@@ -109,6 +109,10 @@ jobs:
         cd terraform
         terraform ${{ github.event.inputs.status }} -auto-approve -input=false
 
+    - name: Get Terraform Output
+      id: output
+      run: echo "::set-output name=public_ips::$(terraform output -json public_ips)"
+        
   ansible:
     name: 'Ansible'
     runs-on: ubuntu-latest
@@ -124,3 +128,13 @@ jobs:
         
     - name: Checkout
       uses: actions/checkout@v4
+
+    - name: Create Inventory File
+      run: |
+        echo "[all]" > hosts
+        for ip in $(echo "${{ steps.output.outputs.public_ips }}" | jq -r '.[]'); do
+          echo "$ip" ansible_user=ubuntu >> hosts
+        done 
+
+    - name: Run Ansible Playbook
+      run: ansible-playbook -i hosts main.yml      

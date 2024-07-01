@@ -9,3 +9,8 @@ resource "hcloud_network_subnet" "network-subnet" {
   network_zone = "eu-central"
   ip_range     = "10.0.1.0/24"
 }
+
+resource "hcloud_floating_ip" "master" {
+  type      = "ipv4"
+  server_id = hcloud_server.server.id
+}
