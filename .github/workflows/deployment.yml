@@ -134,6 +134,9 @@ jobs:
         sudo apt update 
         sudo apt install ansible -y
         ansible --version
+        
+    - name: Checkout
+      uses: actions/checkout@v4
 
     - name: Setup SSH Keys and known_hosts
       env:
@@ -146,9 +149,6 @@ jobs:
         mkdir ~/.ssh
         touch ~/.ssh/id_ed25519
         cat ~/.ssh/id_ed25519
-        
-    - name: Checkout
-      uses: actions/checkout@v4
 
     - name: Create Inventory File
       env:
