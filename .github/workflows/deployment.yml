@@ -74,6 +74,9 @@ jobs:
       run:
         shell: bash
 
+    outputs:
+      tfstate: ${{ steps.tfstate.outputs }}
+
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -110,8 +113,10 @@ jobs:
         terraform ${{ github.event.inputs.status }} -auto-approve -input=false
 
     - name: Get Terraform Output
-      id: output
-      run: echo "::set-output name=public_ips::$(terraform output -json public_ips)"
+      id: tfstate
+      run: |
+        terraform output
+        terraform output >> "$GITHUB_OUTPUT"
         
   ansible:
     name: 'Ansible'
@@ -130,6 +135,8 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Create Inventory File
+      env:
+        tfstate: ${{needs.terraform.}}
       run: |
         echo "[all]" > hosts
         for ip in $(echo "${{ steps.output.outputs.public_ips }}" | jq -r '.[]'); do
