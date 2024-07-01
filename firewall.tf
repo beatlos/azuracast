@@ -22,3 +22,17 @@ resource "hcloud_firewall" "web" {
   }
 
 }
+
+resource "hcloud_firewall" "admin" {
+  name = "web"
+
+  rule {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "22"
+    source_ips = [
+      "0.0.0.0/0"
+    ]
+  }
+
+}
