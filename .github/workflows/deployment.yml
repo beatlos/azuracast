@@ -126,7 +126,7 @@ jobs:
     - name: test
       run: |
         terraform output -json > json
-        jq -r ".public_ips.value.ipv4_address"
+        jq -r ".public_ips.value.ipv4_address" json
         
   ansible:
     name: 'Ansible'
