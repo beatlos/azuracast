@@ -115,7 +115,8 @@ jobs:
       id: tfstate
       run: |
         cd terraform
-        terraform output >> $GITHUB_OUTPUT
+        public_ips=$(terraform output -json public_ips | jq -r '.[]')
+        echo "$public_ips" >> $GITHUB_OUTPUT
         
   ansible:
     name: 'Ansible'
