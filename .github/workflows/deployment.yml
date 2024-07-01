@@ -110,5 +110,11 @@ jobs:
     needs: terraform
     
     steps:
+    - name: Setup Ansible
+      run: |
+        apt update 
+        apt install ansible -y
+        ansible --version
+        
     - name: Checkout
       uses: actions/checkout@v4
