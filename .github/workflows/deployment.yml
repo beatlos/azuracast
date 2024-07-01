@@ -68,14 +68,13 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
+    outputs:
+      tfstate: ${{ steps.tfstate.outputs }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
-
-    outputs:
-      tfstate: ${{ steps.tfstate.outputs }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -115,6 +114,7 @@ jobs:
     - name: Get Terraform Output
       id: tfstate
       run: |
+        cd terraform
         terraform output
         terraform output >> "$GITHUB_OUTPUT"
         
