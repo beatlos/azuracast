@@ -1,3 +1,3 @@
 output "public_ips" {
-  value = hcloud_floating_ip.master.ip_address
+  value = hcloud_server.server.ip_address.public_net
 }
