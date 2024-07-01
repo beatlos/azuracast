@@ -45,8 +45,8 @@
 name: 'Deployment'
 
 on:
-#  push:
-#    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   pull_request:
   workflow_dispatch:
     inputs:
@@ -115,7 +115,8 @@ jobs:
       id: tf_output
       run: |
         cd terraform
-        terraform output -json | jq -r ".public_ips.value.ipv4_address"
+        terraform output -json > json
+        jq -r ".public_ips.value.ipv4_address" json
         public_ip=$(terraform output -json | jq -r ".public_ips.value.ipv4_address")
         echo "$public_ip"
         echo "public_ip=${public_ip}" >> $GITHUB_OUTPUT
