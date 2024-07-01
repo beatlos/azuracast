@@ -4,7 +4,7 @@ resource "hcloud_server" "server" {
   image       = "rocky-9"
   location    = "nbg1"
   ssh_keys    = [hcloud_ssh_key.default.id]
-  firewall_ids= [hcloud_firewall.web.id]
+  firewall_ids= ["hcloud_firewall.web.id", "hcloud_firewall.admin.id"]
 
   network {
     network_id = hcloud_network.network.id
