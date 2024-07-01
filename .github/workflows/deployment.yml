@@ -114,9 +114,8 @@ jobs:
     - name: Get Terraform Output
       id: tf_output
       run: |
-        sudo apt install jq -y
         cd terraform
-        public_ip=$(terraform output | jq -r ".public_ip")
+        public_ip=$(terraform output -json | jq -r ".public_ip")
         echo "$public_ip"
         echo "public_ip=${public_ip}" >> $GITHUB_OUTPUT
         
