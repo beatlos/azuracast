@@ -115,7 +115,6 @@ jobs:
       id: tfstate
       run: |
         cd terraform
-        terraform output
         terraform output >> $GITHUB_OUTPUT
         
   ansible:
