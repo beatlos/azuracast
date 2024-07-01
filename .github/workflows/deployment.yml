@@ -140,6 +140,7 @@ jobs:
       env:
         public_ip: ${{ needs.terraform.outputs.public_ip }}
       run: |
+        cd ansible
         echo "[all]" > hosts
         echo "$public_ip ansible_user=ubuntu" >> hosts
 
