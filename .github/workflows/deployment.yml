@@ -112,8 +112,8 @@ jobs:
     steps:
     - name: Setup Ansible
       run: |
-        apt update 
-        apt install ansible -y
+        sudo apt update 
+        sudo apt install ansible -y
         ansible --version
         
     - name: Checkout
