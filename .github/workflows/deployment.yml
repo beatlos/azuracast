@@ -116,7 +116,7 @@ jobs:
       run: |
         cd terraform
         terraform output
-        terraform output >> "$GITHUB_OUTPUT"
+        terraform output >> $GITHUB_OUTPUT
         
   ansible:
     name: 'Ansible'
