@@ -144,7 +144,7 @@ jobs:
       run: |
         pwd
         mkdir ~/.ssh
-        touch ~/.ssh/id_ed25519
+        touch ~/.ssh/{id_ed25519,known_hosts}
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
         ls -l ~/.ssh/
 
