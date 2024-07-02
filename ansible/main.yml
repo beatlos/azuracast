@@ -14,7 +14,7 @@
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/AzuraCast/AzuraCast/main/docker.sh
         dest: /var/azuracast/docker.sh
-        mode: '0444'
+        mode: '0445'
 
     - name: Execute /var/azuracast/docker.sh install
       ansible.builtin.shell: /var/azuracast/docker.sh install
