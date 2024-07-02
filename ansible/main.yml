@@ -28,4 +28,4 @@
         mode: '0445'
 
     - name: Execute /var/azuracast/docker.sh install
-      ansible.builtin.shell: printf 'N\nen_US\nno\nno\n' | /var/azuracast/docker.sh install
+      ansible.builtin.shell: printf 'N\nen_US\nno\nno\nyes\n' | /var/azuracast/docker.sh install
