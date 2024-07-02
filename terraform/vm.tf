@@ -1,7 +1,7 @@
 resource "hcloud_server" "server" {
   name        = "azurecast"
   server_type = "cpx11"
-  image       = "rocky-9"
+  image       = "ubuntu-24.04"
   location    = "nbg1"
   ssh_keys    = [hcloud_ssh_key.default.id]
 
