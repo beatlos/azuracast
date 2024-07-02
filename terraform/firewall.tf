@@ -21,6 +21,16 @@ resource "hcloud_firewall" "web" {
     ]
   }
 
+  rule {
+    direction = "in"
+    protocol  = "tcp"
+    port      = "8000"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+
 }
 
 resource "hcloud_firewall" "admin" {
