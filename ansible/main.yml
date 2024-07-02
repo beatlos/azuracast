@@ -1,8 +1,20 @@
 ---
-- name: Ping all hosts
+- name: Setup azuracast
   hosts: all
   gather_facts: no
 
   tasks:
-    - name: Ping the hosts
-      ansible.builtin.ping:
+    - name: Create a directory /var/azuracast
+      ansible.builtin.file:
+        path: /var/azuracast
+        state: directory
+        mode: '0755'
+      
+    - name: Download https://raw.githubusercontent.com/AzuraCast/AzuraCast/main/docker.sh
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/AzuraCast/AzuraCast/main/docker.sh
+        dest: /var/azuracast/docker.sh
+        mode: '0444'
+
+    - name: Execute /var/azuracast/docker.sh install
+      ansible.builtin.shell: /var/azuracast/docker.sh install
