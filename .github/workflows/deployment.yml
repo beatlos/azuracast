@@ -140,10 +140,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup SSH Keys and known_hosts
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
-        pwd
         mkdir ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
@@ -155,7 +152,6 @@ jobs:
         cd ansible
         echo "[all]" > hosts
         echo "$public_ip ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_ed25519" >> hosts
-        cat hosts
 
     - name: Run Ansible Playbook
       run: |
