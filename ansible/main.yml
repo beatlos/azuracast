@@ -10,15 +10,15 @@
         state: directory
         mode: '0755'
         
-    - name: Install docker
+    - name: Install podman
       ansible.builtin.apt:
-        name: docker
+        name: podman
         state: present
         update_cache: yes
         
-    - name: Install docker-compose
+    - name: Install podman-compose
       ansible.builtin.apt:
-        name: docker-compose
+        name: podman-compose
         state: present 
         
     - name: Download https://raw.githubusercontent.com/AzuraCast/AzuraCast/main/docker.sh
