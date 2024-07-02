@@ -9,7 +9,17 @@
         path: /var/azuracast
         state: directory
         mode: '0755'
-      
+        
+    - name: Install docker
+      ansible.builtin.apt:
+        name: docker
+        state: present
+        
+    - name: Install docker-compose
+      ansible.builtin.apt:
+        name: docker-compose
+        state: present 
+        
     - name: Download https://raw.githubusercontent.com/AzuraCast/AzuraCast/main/docker.sh
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/AzuraCast/AzuraCast/main/docker.sh
